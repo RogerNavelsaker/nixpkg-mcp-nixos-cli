@@ -1,0 +1,41 @@
+{
+  "name": "nixos-cli",
+  "version": "2.3.0-p2",
+  "private": false,
+  "description": "Thin Bun CLI wrapper for calling the upstream nixos-mcp server",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RogerNavelsaker/nixos-cli.git"
+  },
+  "homepage": "https://github.com/RogerNavelsaker/nixos-cli#readme",
+  "bugs": {
+    "url": "https://github.com/RogerNavelsaker/nixos-cli/issues"
+  },
+  "keywords": [
+    "bun",
+    "cli",
+    "mcp",
+    "nixos"
+  ],
+  "packageManager": "bun@1.3.10",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "nixos-cli": "./bin/nixos-cli.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.27.1"
+  },
+  "scripts": {
+    "check": "bun --eval \"JSON.parse(await Bun.file('package.json').text()); console.log('package.json ok')\"",
+    "pack": "bun pm pack --destination dist"
+  }
+}

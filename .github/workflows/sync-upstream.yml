@@ -1,0 +1,43 @@
+name: Sync Upstream
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_repo:
+        description: "Git URL or local path for the source repo"
+        required: false
+        default: "https://github.com/RogerNavelsaker/nixos-cli.git"
+        type: string
+      source_ref:
+        description: "Git ref to sync when source_repo is remote"
+        required: false
+        default: "main"
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Sync source tree
+        run: |
+          ./scripts/sync-from-upstream.sh \
+            "${{ inputs.source_repo || 'https://github.com/RogerNavelsaker/nixos-cli.git' }}" \
+            "${{ inputs.source_ref || 'main' }}"
+
+      - name: Build updated package
+        run: nix build .#default --accept-flake-config

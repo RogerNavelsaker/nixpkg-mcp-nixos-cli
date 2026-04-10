@@ -1,0 +1,20 @@
+{
+  "stubbed": false,
+  "source": {
+    "path": "upstream",
+    "version": "2.3.0-p2"
+  },
+  "package": {
+    "revision": 2,
+    "version": "2.3.0-p2-r1"
+  },
+  "binary": {
+    "name": "nixos-cli",
+    "entrypoint": "bin/nixos-cli.mjs"
+  },
+  "meta": {
+    "description": "Thin Nix package for the NixOS CLI bridge",
+    "homepage": "https://github.com/RogerNavelsaker/nixos-cli#readme",
+    "licenseSpdx": "MIT"
+  }
+}
