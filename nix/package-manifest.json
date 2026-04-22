@@ -1,12 +1,16 @@
 {
   "stubbed": false,
   "source": {
-    "path": "upstream",
+    "type": "github",
+    "owner": "RogerNavelsaker",
+    "repo": "nixos-cli",
+    "defaultBranch": "main",
+    "rev": "ea2f88762f8929acf04a3e61812718aa074a9768",
+    "hash": "sha256-6j3e+4di/ShzoyKD8h6pWimKb2bHOXVA6jSsapyjRk8=",
     "version": "2.3.0-p2"
   },
   "package": {
-    "revision": 2,
-    "version": "2.3.0-p2-r1"
+    "revision": 2
   },
   "binary": {
     "name": "nixos-cli",

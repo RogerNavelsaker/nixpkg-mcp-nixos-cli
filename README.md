@@ -7,7 +7,8 @@ This repo should own only reproducible Nix packaging. It should not own Pi-speci
 ## Current Status
 
 - Exposes the CLI binary as `nixos-cli`
-- Packages the local `nixos-cli` source tree
+- Fetches upstream source directly from the configured remote GitHub repo
+- Narrows packaging to the upstream package surface instead of depending on a committed vendored tree
 - Uses the package repo’s Bun lock surface with `bun2nix`
 - Wraps the CLI with Bun from the Nix store, so Bun does not need to be installed separately in Flox
 - Carries a package revision separate from upstream so Flox can detect packaging-only updates
@@ -24,11 +25,11 @@ This repo should own only reproducible Nix packaging. It should not own Pi-speci
 
 ## Direction
 
-The source of truth for this repo is the local `nixos-cli` runtime repo. Syncing a new version means:
+The source of truth for this repo is the upstream `nixos-cli` Git repo. Syncing a new version means:
 
-- copying the current `nixos-cli` source tree
+- cloning the configured upstream repo and ref
 - copying its `bun.lock`
 - regenerating `bun.nix`
-- bumping `nix/package-manifest.json`
+- updating the pinned upstream revision and source hash in `nix/package-manifest.json`
 
-The GitHub workflow is manual-only because hosted runners cannot observe local workspace changes. Use `workflow_dispatch` with a git URL and ref when you want a remote sync.
+The sync script defaults to the remote GitHub upstream and does not materialize a committed `upstream/` tree anymore.
